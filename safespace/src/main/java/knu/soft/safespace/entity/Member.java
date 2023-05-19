@@ -1,9 +1,7 @@
 package knu.soft.safespace.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import knu.soft.safespace.domain.Authority;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,16 +10,21 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String loginId;
-    private String password;
-    private Integer sex;
     private String email;
+    private String password;
+    private String name;
+
+
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
+
+    private Integer sex;
     private String phoneNumber;
     private String profileImage;
 }
