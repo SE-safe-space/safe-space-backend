@@ -28,6 +28,7 @@ public class MemberRequestDto {
                 .name(name)
                 .sex(sex)
                 .profileImage(profileImage)
+                .phoneNumber(phoneNumber)
                 .build();
     }
 
