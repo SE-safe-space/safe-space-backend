@@ -1,5 +1,7 @@
 package knu.soft.safespace.dto;
 
+import knu.soft.safespace.domain.CounselingType;
+import knu.soft.safespace.domain.MemberType;
 import knu.soft.safespace.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,11 +19,15 @@ public class MemberResponseDto {
     private Integer sex;
     private String phoneNumber;
     private String profileImage;
+    private MemberType type;
+    private CounselingType counselingType;
 
     public static MemberResponseDto of(Member member) {
         return MemberResponseDto.builder()
                 .email(member.getEmail())
                 .password(member.getPassword())
+                .type(member.getType())
+                .counselingType(member.getCounselingType())
                 .name(member.getName())
                 .sex(member.getSex())
                 .phoneNumber(member.getPhoneNumber())

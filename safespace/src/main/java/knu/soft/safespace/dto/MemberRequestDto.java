@@ -1,6 +1,8 @@
 package knu.soft.safespace.dto;
 
 import knu.soft.safespace.domain.Authority;
+import knu.soft.safespace.domain.CounselingType;
+import knu.soft.safespace.domain.MemberType;
 import knu.soft.safespace.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +17,10 @@ public class MemberRequestDto {
 
     private String email;
     private String password;
+
+    private MemberType type;
+    private CounselingType counselingType;
+
     private String name;
     private Integer sex;
     private String phoneNumber;
@@ -25,6 +31,8 @@ public class MemberRequestDto {
                 .email(email)
                 .password(passwordEncoder.encode(password))
                 .authority(Authority.ROLE_USER)
+                .type(type)
+                .counselingType(counselingType)
                 .name(name)
                 .sex(sex)
                 .profileImage(profileImage)

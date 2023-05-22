@@ -1,6 +1,7 @@
 package knu.soft.safespace.service;
 
 import knu.soft.safespace.dto.MemberResponseDto;
+import knu.soft.safespace.entity.Member;
 import knu.soft.safespace.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,4 +24,5 @@ public class MemberService {
                 .map(MemberResponseDto::of)
                 .orElseThrow(() -> new RuntimeException("유저 정보가 없습니다."));
     }
+
 }

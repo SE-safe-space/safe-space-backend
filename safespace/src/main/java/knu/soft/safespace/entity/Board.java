@@ -1,9 +1,7 @@
 package knu.soft.safespace.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import knu.soft.safespace.dto.BoardResponseDto;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,10 +14,12 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String writer;
     private String title;
     private Integer hide;
@@ -27,4 +27,15 @@ public class Board {
     private String type;
     private LocalDateTime createdAt;
 
+
+    public BoardResponseDto of() {
+        return BoardResponseDto.builder()
+                .id(id)
+                .writer(writer)
+                .title(title)
+                .hide(hide)
+                .type(type)
+                .createdAt(createdAt)
+                .build();
+    }
 }

@@ -1,5 +1,6 @@
 package knu.soft.safespace.service;
 
+import knu.soft.safespace.domain.MemberType;
 import knu.soft.safespace.dto.MemberRequestDto;
 import knu.soft.safespace.dto.MemberResponseDto;
 import knu.soft.safespace.dto.TokenDto;
@@ -10,6 +11,7 @@ import knu.soft.safespace.jwt.*;
 import knu.soft.safespace.repository.MemberRepository;
 import knu.soft.safespace.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -26,6 +28,11 @@ public class AuthService {
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
 
+    @Value("${default_img}")
+    private String defaultImg;
+    @Value("${expert_img}")
+    private String expertImg;
+
     @Transactional
     public MemberResponseDto signup(MemberRequestDto memberRequestDto) {
         if (memberRepository.existsByEmail(memberRequestDto.getEmail())) {
@@ -33,6 +40,13 @@ public class AuthService {
         }
 
         Member member = memberRequestDto.toMember(passwordEncoder);
+
+        if(member.getType() == MemberType.MEMBER){
+            member.setProfileImage(defaultImg);
+        } else{
+            member.setProfileImage(expertImg);
+        }
+
         return MemberResponseDto.of(memberRepository.save(member));
     }
 
