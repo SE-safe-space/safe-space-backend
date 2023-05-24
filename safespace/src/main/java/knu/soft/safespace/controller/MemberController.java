@@ -29,6 +29,7 @@ public class MemberController {
         return ResponseEntity.ok(memberService.findMemberInfoByEmail(email));
     }
 
+    // 프로필 이미지 변경
     @PatchMapping("/image")
     public ResponseEntity<String> modifyProfileImage(@RequestParam Long id, @RequestPart MultipartFile file) {
         return ResponseEntity.ok(fileUploadService.uploadFile(id, file));

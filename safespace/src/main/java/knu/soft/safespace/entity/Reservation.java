@@ -1,9 +1,7 @@
 package knu.soft.safespace.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import knu.soft.safespace.domain.ReservationState;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +12,7 @@ import javax.persistence.Id;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 public class Reservation {
     @Id
@@ -23,5 +22,5 @@ public class Reservation {
     private Long memberId;
     private Long counselorId;
     private String type;
-    private Integer accept;
+    private ReservationState accept;
 }

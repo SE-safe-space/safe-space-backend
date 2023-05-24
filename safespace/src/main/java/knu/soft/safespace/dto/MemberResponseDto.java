@@ -34,4 +34,14 @@ public class MemberResponseDto {
                 .profileImage(member.getProfileImage())
                 .build();
     }
+
+    public static MemberResponseDto toCounselor(Member member) {
+        return MemberResponseDto.builder()
+                .name(member.getName())
+                .sex(member.getSex())
+                .counselingType(member.getCounselingType())
+                .phoneNumber(member.getPhoneNumber())
+                .profileImage(member.getProfileImage())
+                .build();
+    }
 }
