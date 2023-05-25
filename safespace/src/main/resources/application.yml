@@ -1,0 +1,55 @@
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+
+  h2:
+    console:
+      enabled: true
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DBhost}:${DBPort}/${DBSchema}?characterEncoding=utf8&serverTimezone=Asia/Seoul
+    username: ${DBname}
+    password: ${DBpassword}
+
+  freemarker:
+    cache: false
+
+  jpa:
+#    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: false
+        show_sql: false
+
+
+cloud:
+  aws:
+    s3:
+      bucket: ${S3Name}
+    credentials:
+      access-key: ${S3AccessKey}
+      secret-key: ${S3SecretKey}
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+
+
+jwt:
+  secret: ${JWTKey}
+
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: ERROR
+
+default_img : ${DefaultImg}
+expert_img : ${ExpertImg}
