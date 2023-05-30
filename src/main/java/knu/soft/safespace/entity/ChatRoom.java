@@ -1,6 +1,5 @@
 package knu.soft.safespace.entity;
 
-import knu.soft.safespace.domain.ReservationState;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -12,16 +11,13 @@ import javax.persistence.Id;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
-public class Reservation {
+@Builder
+public class ChatRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long memberId;
     private Long counselorId;
-    private String type;
-    private String text;
-    private ReservationState accept;
 }

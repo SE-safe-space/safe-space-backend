@@ -1,6 +1,7 @@
 package knu.soft.safespace.controller;
 
 import knu.soft.safespace.dto.MemberResponseDto;
+import knu.soft.safespace.dto.ReservationDto;
 import knu.soft.safespace.entity.Member;
 import knu.soft.safespace.entity.Reservation;
 import knu.soft.safespace.repository.MemberRepository;
@@ -26,8 +27,8 @@ public class ConsultingController {
 
     // 예약 하기
     @PostMapping("/reserve")
-    public ResponseEntity<String> reserve(@RequestBody Reservation reservation){
-        return ResponseEntity.ok(consultingService.reserve(reservation));
+    public ResponseEntity<String> reserve(@RequestBody ReservationDto reservationDto){
+        return ResponseEntity.ok(consultingService.reserve(reservationDto));
     }
 
     // 예약 조회 (상태로 판단)
@@ -37,10 +38,15 @@ public class ConsultingController {
     }
 
     // 예약 승인
-    @PostMapping
-    public ResponseEntity<String> acceptReservation(@RequestBody Reservation reservation){
-        return ResponseEntity.ok(consultingService.acceptReservation(reservation));
+    @PostMapping("/accept")
+    public ResponseEntity<String> acceptReservation(@RequestBody ReservationDto reservationDto){
+        return ResponseEntity.ok(consultingService.acceptReservation(reservationDto));
     }
 
     // 예약 거절
+    @PostMapping("/reject")
+    public ResponseEntity<String> rejectReservation(@RequestBody ReservationDto reservationDto){
+        return ResponseEntity.ok(consultingService.rejectReservation(reservationDto));
+    }
+
 }

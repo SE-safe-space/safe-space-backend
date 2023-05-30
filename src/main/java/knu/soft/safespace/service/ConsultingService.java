@@ -3,6 +3,7 @@ package knu.soft.safespace.service;
 import knu.soft.safespace.domain.MemberType;
 import knu.soft.safespace.domain.ReservationState;
 import knu.soft.safespace.dto.MemberResponseDto;
+import knu.soft.safespace.dto.ReservationDto;
 import knu.soft.safespace.entity.Member;
 import knu.soft.safespace.entity.Reservation;
 import knu.soft.safespace.repository.MemberRepository;
@@ -36,11 +37,12 @@ public class ConsultingService {
         return counselors;
     }
 
-    public String reserve(Reservation reservation){
+    public String reserve(ReservationDto reservationDto){
         reservationRepository.save(Reservation.builder()
-                .memberId(reservation.getMemberId())
-                .counselorId(reservation.getCounselorId())
-                .type(reservation.getType())
+                .memberId(reservationDto.getMemberId())
+                .counselorId(reservationDto.getCounselorId())
+                .type(reservationDto.getType())
+                .text(reservationDto.getText())
                 .accept(WAIT)
                 .build());
         return "예약 완료";
@@ -50,9 +52,9 @@ public class ConsultingService {
         return reservationRepository.findByMemberIdOrCounselorId(id, id);
     }
 
-    public String acceptReservation(Reservation reservation) {
+    public String acceptReservation(ReservationDto reservationDto) {
         Reservation findReservation = reservationRepository.
-                findByMemberIdAndCounselorId(reservation.getMemberId(), reservation.getCounselorId());
+                findByMemberIdAndCounselorId(reservationDto.getMemberId(), reservationDto.getCounselorId());
 
         // 승인됨으로 바꿔줌
         if (findReservation.getAccept() == WAIT){
@@ -64,4 +66,8 @@ public class ConsultingService {
         return "예약 승인 완료";
     }
 
+    public String rejectReservation(ReservationDto reservationDto) {
+        reservationRepository.deleteByMemberIdAndCounselorId(reservationDto.getMemberId(), reservationDto.getCounselorId());
+        return "예약 거절 완료";
+    }
 }
