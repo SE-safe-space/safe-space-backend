@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/safe/member")
+@CrossOrigin
 public class MemberController {
     private final MemberService memberService;
     private final FileUploadService fileUploadService;

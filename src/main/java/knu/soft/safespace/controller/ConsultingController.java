@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/safe/consult")
+@CrossOrigin
 public class ConsultingController {
     private final ConsultingService consultingService;
 

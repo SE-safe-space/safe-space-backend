@@ -14,6 +14,7 @@ import java.util.ArrayList;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/safe/board")
+@CrossOrigin
 public class BoardController {
 
     private final BoardService boardService;
