@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class MemberResponseDto {
+    private Long id;
     private String email;
     private String password;
     private String name;
@@ -24,6 +25,7 @@ public class MemberResponseDto {
 
     public static MemberResponseDto of(Member member) {
         return MemberResponseDto.builder()
+                .id(member.getId())
                 .email(member.getEmail())
                 .password(member.getPassword())
                 .type(member.getType())
