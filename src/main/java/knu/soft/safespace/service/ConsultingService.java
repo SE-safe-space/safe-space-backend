@@ -4,8 +4,10 @@ import knu.soft.safespace.domain.MemberType;
 import knu.soft.safespace.domain.ReservationState;
 import knu.soft.safespace.dto.MemberResponseDto;
 import knu.soft.safespace.dto.ReservationDto;
+import knu.soft.safespace.entity.ChatRoom;
 import knu.soft.safespace.entity.Member;
 import knu.soft.safespace.entity.Reservation;
+import knu.soft.safespace.repository.ChatRoomRepository;
 import knu.soft.safespace.repository.MemberRepository;
 import knu.soft.safespace.repository.ReservationRepository;
 import lombok.Getter;
@@ -22,6 +24,8 @@ import static knu.soft.safespace.domain.MemberType.*;
 @Service
 @RequiredArgsConstructor
 public class ConsultingService {
+
+    private final ChatRoomRepository chatRoomRepository;
 
     private final MemberRepository memberRepository;
     private final ReservationRepository reservationRepository;
@@ -62,7 +66,12 @@ public class ConsultingService {
         }
 
         // 채팅방도 만들어줘야함.
-
+        chatRoomRepository.save(ChatRoom.builder()
+                .member(memberRepository.findById(reservationDto.getMemberId())
+                        .orElseThrow(() -> new RuntimeException("멤버가 없습니다.")))
+                .counselor(memberRepository.findById(reservationDto.getCounselorId())
+                        .orElseThrow((() -> new RuntimeException("멤버가 없습니다."))))
+                .build());
         return "예약 승인 완료";
     }
 
