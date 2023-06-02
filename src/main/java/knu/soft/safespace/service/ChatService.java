@@ -10,6 +10,7 @@ import knu.soft.safespace.repository.MemberRepository;
 import knu.soft.safespace.repository.MessageRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import static knu.soft.safespace.domain.MemberType.*;
 
 @Getter
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class ChatService {
 
@@ -32,10 +34,15 @@ public class ChatService {
                 .orElseThrow(() -> new RuntimeException("멤버가 없습니다."));
 
         ArrayList<ChatRoomResponseDto> chatRoomResponseDtos = new ArrayList<>();
-        // 만약 멤버라면
-        if (m.getType() == MEMBER){
+        // 조회하는 사람이 상담자라면, 멤버들의 정보를 보여준다.
+
+        log.info("type = {}", m.getType());
+
+        if (m.getType() == COUNSELOR){
+            log.info("counselor!");
+
             // 멤버 id로 매칭해서 정보 넘겨준다.
-            List<ChatRoom> chatRooms = chatRoomRepository.findByMember_Id(id);
+            List<ChatRoom> chatRooms = chatRoomRepository.findByCounselor_Id(id);
 
             for (ChatRoom chatRoom : chatRooms) {
                 chatRoomResponseDtos.add(ChatRoomResponseDto.builder()
@@ -48,8 +55,8 @@ public class ChatService {
             // 만약 상담자라면
         } else{
             // 상담자 id로 매칭해서 정보 넘겨준다.
-            
-            List<ChatRoom> chatRooms = chatRoomRepository.findByCounselor_Id(id);
+            log.info("member!");
+            List<ChatRoom> chatRooms = chatRoomRepository.findByMember_Id(id);
 
             for (ChatRoom chatRoom : chatRooms) {
                 chatRoomResponseDtos.add(ChatRoomResponseDto.builder()
@@ -66,7 +73,7 @@ public class ChatService {
 
     // 특정 채팅방 조회시 메세지 데이터 다 줌, Message 테이블에서 ChatRoomId 같은것들 다 들고온다.
     public ArrayList<Message> getMessages(Long chatRoomId){
-        return (ArrayList<Message>) messageRepository.findByChatRoomId_Id(chatRoomId);
+        return (ArrayList<Message>) messageRepository.findByChatRoomId(chatRoomId);
     }
 
     // 특정 채팅방에 채팅 보냄

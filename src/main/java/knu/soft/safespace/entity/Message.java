@@ -15,9 +15,7 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "chatRoom")
-    private ChatRoom chatRoomId;
+    private Long chatRoomId;
     private Long senderId;
     private String text;
 }

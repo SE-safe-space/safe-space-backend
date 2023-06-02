@@ -39,6 +39,7 @@ public class MemberResponseDto {
 
     public static MemberResponseDto toCounselor(Member member) {
         return MemberResponseDto.builder()
+                .id(member.getId())
                 .name(member.getName())
                 .sex(member.getSex())
                 .counselingType(member.getCounselingType())
