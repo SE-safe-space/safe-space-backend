@@ -38,7 +38,7 @@ public class ConsultingController {
         return ResponseEntity.ok(consultingService.getReservation(id));
     }
 
-    // 예약 승인
+    // 예약 승인 -> 채팅방까지 만들어준다.
     @PostMapping("/accept")
     public ResponseEntity<String> acceptReservation(@RequestBody ReservationDto reservationDto){
         return ResponseEntity.ok(consultingService.acceptReservation(reservationDto));

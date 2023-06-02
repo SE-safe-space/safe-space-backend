@@ -4,6 +4,7 @@ import knu.soft.safespace.domain.MemberType;
 import knu.soft.safespace.dto.ChatRoomResponseDto;
 import knu.soft.safespace.entity.ChatRoom;
 import knu.soft.safespace.entity.Member;
+import knu.soft.safespace.entity.Message;
 import knu.soft.safespace.repository.ChatRoomRepository;
 import knu.soft.safespace.repository.MemberRepository;
 import knu.soft.safespace.repository.MessageRepository;
@@ -63,7 +64,14 @@ public class ChatService {
         return chatRoomResponseDtos;
     }
 
-    // 특정 채팅방 조회시 메세지 데이터 다 줌
+    // 특정 채팅방 조회시 메세지 데이터 다 줌, Message 테이블에서 ChatRoomId 같은것들 다 들고온다.
+    public ArrayList<Message> getMessages(Long chatRoomId){
+        return (ArrayList<Message>) messageRepository.findByChatRoomId_Id(chatRoomId);
+    }
 
     // 특정 채팅방에 채팅 보냄
+    public String sendMessage(Message message) {
+        messageRepository.save(message);
+        return "메세지 전송 완료";
+    }
 }
