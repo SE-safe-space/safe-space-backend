@@ -15,6 +15,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -36,33 +37,33 @@ public class SecurityConfig {
                 .antMatchers("/h2-console/**", "/favicon.ico");
     }
 
-//    @Bean
-//    public CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration config = new CorsConfiguration();
-//
-//        config.setAllowCredentials(true);
-//        config.setAllowedOrigins(Arrays.asList("*"));
-//        config.setAllowedHeaders(Arrays.asList("*"));
-//        config.setAllowedMethods(Arrays.asList("HEAD","POST","GET","DELETE","PUT","PATCH", "OPTIONS"));
-//        config.setAllowedHeaders(Arrays.asList("*"));
-//
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", config);
-//        return source;
-//    }
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("*");
-        configuration.addAllowedMethod("*");
-        configuration.addAllowedHeader("*");
-        configuration.setAllowCredentials(true);
-        configuration.setMaxAge(3600L);
+        CorsConfiguration config = new CorsConfiguration();
+
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(List.of("*"));
+        config.setAllowedHeaders(List.of("*"));
+        config.setAllowedMethods(Arrays.asList("HEAD","POST","GET","DELETE","PUT","PATCH", "OPTIONS"));
+        config.setAllowedHeaders(List.of("*"));
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/**", config);
         return source;
     }
+
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.addAllowedOrigin("*");
+//        configuration.addAllowedMethod("*");
+//        configuration.addAllowedHeader("*");
+//        configuration.setAllowCredentials(true);
+//        configuration.setMaxAge(3600L);
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
 
 
     @Bean
