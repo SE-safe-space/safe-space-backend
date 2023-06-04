@@ -20,7 +20,7 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfig {
+public class SecurityConfig  {
     private final TokenProvider tokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
@@ -42,7 +42,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(List.of("*"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:5000"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowedMethods(Arrays.asList("HEAD","POST","GET","DELETE","PUT","PATCH", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
@@ -70,8 +70,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // CSRF 설정 Disable
         http.csrf().disable()
-
+                .cors().configurationSource(corsConfigurationSource())
                 // exception handling 할 때 우리가 만든 클래스를 추가
+                .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .accessDeniedHandler(jwtAccessDeniedHandler)
@@ -80,6 +81,8 @@ public class SecurityConfig {
                 .headers()
                 .frameOptions()
                 .sameOrigin()
+
+
 
                 // 시큐리티는 기본적으로 세션을 사용
                 // 여기서는 세션을 사용하지 않기 때문에 세션 설정을 Stateless 로 설정
@@ -92,8 +95,6 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated()   // 나머지 API 는 전부 인증 필요
-
-                .and().cors().configurationSource(corsConfigurationSource())
 
                 // JwtFilter 를 addFilterBefore 로 등록했던 JwtSecurityConfig 클래스를 적용
                 .and()
