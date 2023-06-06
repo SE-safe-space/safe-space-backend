@@ -22,6 +22,7 @@ public class MemberResponseDto {
     private String profileImage;
     private MemberType type;
     private CounselingType counselingType;
+    private String introduction;
 
     public static MemberResponseDto of(Member member) {
         return MemberResponseDto.builder()
@@ -34,6 +35,7 @@ public class MemberResponseDto {
                 .sex(member.getSex())
                 .phoneNumber(member.getPhoneNumber())
                 .profileImage(member.getProfileImage())
+                .introduction(member.getIntroduction())
                 .build();
     }
 
@@ -45,6 +47,7 @@ public class MemberResponseDto {
                 .counselingType(member.getCounselingType())
                 .phoneNumber(member.getPhoneNumber())
                 .profileImage(member.getProfileImage())
+                .introduction(member.getIntroduction())
                 .build();
     }
 }

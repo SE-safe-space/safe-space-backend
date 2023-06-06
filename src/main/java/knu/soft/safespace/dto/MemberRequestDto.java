@@ -25,6 +25,7 @@ public class MemberRequestDto {
     private Integer sex;
     private String phoneNumber;
     private String profileImage;
+    private String introduction;
 
     public Member toMember(PasswordEncoder passwordEncoder) {
         return Member.builder()
@@ -35,6 +36,7 @@ public class MemberRequestDto {
                 .counselingType(counselingType)
                 .name(name)
                 .sex(sex)
+                .introduction(introduction)
                 .profileImage(profileImage)
                 .phoneNumber(phoneNumber)
                 .build();

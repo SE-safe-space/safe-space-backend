@@ -24,6 +24,7 @@ public class Member {
     private String email;
     private String password;
     private String name;
+    private String introduction;
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
