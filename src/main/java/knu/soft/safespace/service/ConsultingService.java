@@ -1,7 +1,5 @@
 package knu.soft.safespace.service;
 
-import knu.soft.safespace.domain.MemberType;
-import knu.soft.safespace.domain.ReservationState;
 import knu.soft.safespace.dto.MemberResponseDto;
 import knu.soft.safespace.dto.ReservationDto;
 import knu.soft.safespace.entity.ChatRoom;
@@ -13,7 +11,7 @@ import knu.soft.safespace.repository.ReservationRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import knu.soft.safespace.domain.ReservationState;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +28,7 @@ public class ConsultingService {
     private final MemberRepository memberRepository;
     private final ReservationRepository reservationRepository;
 
-    public ArrayList<MemberResponseDto> getCounselor(){
+    public ArrayList<MemberResponseDto> getCounselorList(){
 
         List<Member> byType = memberRepository.findByType(COUNSELOR);
 
@@ -39,6 +37,13 @@ public class ConsultingService {
             counselors.add(MemberResponseDto.toCounselor(member));
         }
         return counselors;
+    }
+
+    public MemberResponseDto getCounselor(Long id){
+        Member counselor = memberRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("멤버가 없습니다."));
+
+        return MemberResponseDto.toCounselor(counselor);
     }
 
     public String reserve(ReservationDto reservationDto){
