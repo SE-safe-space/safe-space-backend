@@ -14,5 +14,4 @@ public class ReservationDto {
     private Long counselorId;
     private String type;
     private String text;
-
 }
