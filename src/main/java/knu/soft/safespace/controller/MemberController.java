@@ -35,4 +35,9 @@ public class MemberController {
     public ResponseEntity<String> modifyProfileImage(@RequestParam Long id, @RequestPart MultipartFile file) {
         return ResponseEntity.ok(fileUploadService.uploadFile(id, file));
     }
+
+    @GetMapping("/token")
+    public ResponseEntity<String> tokenTest() {
+        return ResponseEntity.ok("토큰이 정상적입니다.");
+    }
 }
