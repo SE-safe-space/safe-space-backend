@@ -5,6 +5,7 @@ import knu.soft.safespace.domain.CounselingType;
 import knu.soft.safespace.domain.MemberType;
 import knu.soft.safespace.entity.Member;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class MemberRequestDto {
 
     private String email;

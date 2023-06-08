@@ -1,6 +1,7 @@
 package knu.soft.safespace.controller;
 
 import knu.soft.safespace.dto.MemberResponseDto;
+import knu.soft.safespace.dto.PasswordDto;
 import knu.soft.safespace.jwt.SecurityUtil;
 import knu.soft.safespace.service.FileUploadService;
 import knu.soft.safespace.service.MemberService;
@@ -39,5 +40,10 @@ public class MemberController {
     @GetMapping("/token")
     public ResponseEntity<String> tokenTest() {
         return ResponseEntity.ok("토큰이 정상적입니다.");
+    }
+
+    @PatchMapping("/password")
+    public ResponseEntity<String> changePassword(@RequestBody PasswordDto passwordDto) {
+        return ResponseEntity.ok(memberService.changePassword(passwordDto));
     }
 }
