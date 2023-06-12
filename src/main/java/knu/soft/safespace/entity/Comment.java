@@ -3,10 +3,7 @@ package knu.soft.safespace.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
@@ -25,6 +22,7 @@ public class Comment {
     private String name;
     private String profileImage;
     private LocalDateTime createdAt;
+    @Column(columnDefinition = "TEXT")
     private String text;
 
 }

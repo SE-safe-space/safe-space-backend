@@ -3,10 +3,7 @@ package knu.soft.safespace.entity;
 import knu.soft.safespace.domain.ReservationState;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -22,6 +19,7 @@ public class Reservation {
     private Long memberId;
     private Long counselorId;
     private String type;
+    @Column(columnDefinition = "TEXT")
     private String text;
     private ReservationState accept;
 }

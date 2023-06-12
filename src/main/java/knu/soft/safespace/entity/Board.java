@@ -3,10 +3,7 @@ package knu.soft.safespace.entity;
 import knu.soft.safespace.dto.BoardResponseDto;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
@@ -23,6 +20,7 @@ public class Board {
     private String writer;
     private String title;
     private Integer hide;
+    @Column(columnDefinition = "TEXT")
     private String text;
     private String type;
     private LocalDateTime createdAt;
