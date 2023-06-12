@@ -22,7 +22,7 @@ public class Comment {
     private String name;
     private String profileImage;
     private LocalDateTime createdAt;
-    @Column(columnDefinition = "TEXT")
+    @Column(length = 1000)
     private String text;
 
 }

@@ -17,6 +17,6 @@ public class Message {
 
     private Long chatRoomId;
     private Long senderId;
-    @Column(columnDefinition = "TEXT")
+    @Column(length = 1000)
     private String text;
 }

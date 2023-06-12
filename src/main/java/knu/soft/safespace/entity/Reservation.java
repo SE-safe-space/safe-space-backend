@@ -19,7 +19,7 @@ public class Reservation {
     private Long memberId;
     private Long counselorId;
     private String type;
-    @Column(columnDefinition = "TEXT")
+    @Column(length = 1000)
     private String text;
     private ReservationState accept;
 }

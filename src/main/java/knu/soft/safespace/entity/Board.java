@@ -20,7 +20,7 @@ public class Board {
     private String writer;
     private String title;
     private Integer hide;
-    @Column(columnDefinition = "TEXT")
+    @Column(length = 1000)
     private String text;
     private String type;
     private LocalDateTime createdAt;
